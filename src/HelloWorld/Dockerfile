@@ -25,12 +25,12 @@
 FROM registry.access.redhat.com/ubi8/dotnet-60:6.0-25 as builder
 WORKDIR /opt/app-root/src
 COPY --chown=1001 . .
-RUN dotnet publish -c Release src/HelloWorld/HelloWorld.csproj
+RUN dotnet publish -c Release src/HelloWorld/HelloWorld.sln
 
 
 FROM registry.access.redhat.com/ubi8/dotnet-60:6.0-25
-EXPOSE 8081
-ENV ASPNETCORE_URLS=http://*:8081
+EXPOSE 80
+ENV ASPNETCORE_URLS=http://*:80
 COPY --from=builder /opt/app-root/src/bin /opt/app-root/src/bin
 WORKDIR /opt/app-root/src/bin/Release/net6.0/publish
 CMD ["dotnet", "app.dll"]
