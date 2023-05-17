@@ -25,7 +25,7 @@
 FROM registry.access.redhat.com/ubi8/dotnet-60:6.0-25 as builder
 WORKDIR /opt/app-root/src
 COPY --chown=1001 . .
-RUN dotnet publish -c Release
+RUN dotnet publish -c Release src/HelloWorld/HelloWorld.csproj
 
 
 FROM registry.access.redhat.com/ubi8/dotnet-60:6.0-25
